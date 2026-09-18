@@ -29,6 +29,12 @@ jobs:
           sed -i -E 's#gradle-[0-9.]+-(bin|all)\.zip#gradle-8.10.2-bin.zip#' "$WRAP"
           cat "$WRAP"
 
+      - name: "[DIAGNOSTIC] Force render cap to 60 FPS"
+        run: |
+          F="$PROJ/app/src/main/cpp/winlator/renderer/vulkan/VulkanRendererContext.cpp"
+          sed -i 's/std::chrono::microseconds(6900)/std::chrono::microseconds(16666)/' "$F"
+          grep -n "minFrameInterval" "$F" || true
+
       - name: Clone libadrenotools
         run: |
           rm -rf "$PROJ/app/src/main/cpp/adrenotools"
