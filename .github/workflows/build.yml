@@ -23,6 +23,12 @@ jobs:
           echo "PROJ=$PROJ" >> $GITHUB_ENV
           echo "Project root: $PROJ"
 
+      - name: Force Gradle wrapper 8.10.2 (AGP 8.8 requirement)
+        run: |
+          WRAP="$PROJ/gradle/wrapper/gradle-wrapper.properties"
+          sed -i -E 's#gradle-[0-9.]+-(bin|all)\.zip#gradle-8.10.2-bin.zip#' "$WRAP"
+          cat "$WRAP"
+
       - name: Clone libadrenotools
         run: |
           rm -rf "$PROJ/app/src/main/cpp/adrenotools"
