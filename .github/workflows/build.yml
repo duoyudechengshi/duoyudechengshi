@@ -19,7 +19,7 @@ jobs:
           sudo apt-get install -y p7zip-full
           7z x -y "Winlator-Ludashi-4.1.7z.001"
           ls -la
-          PROJ=$(dirname "$(find . -maxdepth 4 -name gradlew | head -1)")
+          PROJ=$(dirname "$(find . -maxdepth 4 -name settings.gradle -print -quit)")
           echo "PROJ=$PROJ" >> $GITHUB_ENV
           echo "Project root: $PROJ"
 
